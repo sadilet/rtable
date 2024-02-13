@@ -1,14 +1,15 @@
 use std::borrow::Cow;
 use std::cmp;
 use std::collections::HashMap;
-use std::iter::Map;
+
+use serde::{Deserialize, Serialize};
 use crate::Key;
 
 type ListD<'a> = Vec<Value<'a>>;
 type MapD<'a> = HashMap<Key<'a>, Value<'a>>;
 
 
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Value<'a> {
     Null,
     Bool(bool),

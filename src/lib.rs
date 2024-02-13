@@ -1,15 +1,18 @@
+extern crate cfg_if;
+mod debug;
 #[macro_use]
 mod macros;
 mod key;
 mod value;
 
 pub mod util;
-
 pub use value::Value;
 pub use key::Key;
 
 use wasm_bindgen::prelude::*;
 use std::collections::{HashMap, VecDeque};
+use serde::Serialize;
+use serde_wasm_bindgen::{Serializer};
 
 #[wasm_bindgen]
 pub struct Table {
@@ -36,8 +39,11 @@ impl Table {
         Table{ data: data }
     }
 
-    pub fn rows(&self, start: usize, end: usize) {
-        self.data.range(start - 1..end)
+    pub fn rows(&self, start: usize, end: usize) -> JsValue {
+        debug::set_panic_hook();
+
+        let chunk = self.data.range(start..end).collect::<Vec<_>>();
+        chunk.serialize(&Serializer::json_compatible()).unwrap()
     }
 
     pub fn len(&self) -> usize {
