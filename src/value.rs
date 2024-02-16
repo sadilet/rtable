@@ -10,6 +10,7 @@ type MapD<'a> = HashMap<Key<'a>, Value<'a>>;
 
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(untagged)]
 pub enum Value<'a> {
     Null,
     Bool(bool),

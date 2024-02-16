@@ -2,6 +2,7 @@ use std::borrow::Cow;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(untagged)]
 pub enum Key<'a> {
     Bool(bool),
     I64(i64),
