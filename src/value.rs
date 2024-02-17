@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 use crate::Key;
 
 type ListD<'a> = Vec<Value<'a>>;
-type MapD<'a> = HashMap<Key<'a>, Value<'a>>;
+pub type MapD<'a> = HashMap<Key<'a>, Value<'a>>;
 
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
